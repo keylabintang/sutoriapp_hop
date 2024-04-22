@@ -10,6 +10,9 @@ class SutoriApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Sutori App', home: HomeScreen());
+    return MaterialApp(
+        title: 'Sutori App',
+        debugShowCheckedModeBanner: false,
+        home: HomeScreen());
   }
 }

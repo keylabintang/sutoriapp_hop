@@ -8,7 +8,7 @@ class InfoDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Detail Screen")),
       body: Center(
-        child: Text("ini Detail Screen"),
+        child: Text("sample"),
       ),
     );
   }

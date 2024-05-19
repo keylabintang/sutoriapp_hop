@@ -8,57 +8,125 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(context),
-      body: Center(
-          child: TextButton(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Perhatian!'),
-                        content: Text('Silahkan upload'),
-                        actions: <Widget>[
-                          TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text('Y'))
-                        ],
-                      );
-                    });
-              },
-              child: Text('No Story Yet'))),
-      drawer: _drawer(),
-      floatingActionButton: FloatingActionButton(
-        shape: CircleBorder(),
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: ((context) => AddStoryScreen())));
-        },
-        child: Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomNavigationBar(items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search')
-      ]),
-    );
+        appBar: _appBar(context),
+        body: InkWell(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AddStoryScreen()));
+          },
+          child: Hero(
+            tag: 'image_animation',
+            child: Center(
+                child: Image.asset(
+              'gambar.png',
+              width: 200,
+              height: 200,
+            )),
+          ),
+        ),
+
+        // body: Center(
+        //     child: TextButton(
+        //   onPressed: () {
+        //     showDialog(
+        //         context: context,
+        //         builder: (BuildContext context) {
+        //           return AlertDialog(
+        //               title: const Text('Attention!'),
+        //               content: const Text('Please Upload A New Story'),
+        //               actions: <Widget>[
+        //                 TextButton(
+        //                     onPressed: () {
+        //                       Navigator.of(context).pop();
+        //                     },
+        //                     child: const Text('Oke'))
+        //               ]);
+        //         });
+        //   },
+        //   child: const Text(
+        //     'Welcome to The Yokmeet App!\n Please Upload A New Story',
+        //     textAlign: TextAlign.center,
+        //     style: TextStyle(color: Color(0xFF014D4E)),
+        //   ),
+        // )),
+        drawer: _drawer(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          tooltip: 'Add Story',
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AddStoryScreen()));
+          },
+          backgroundColor: Colors.blueGrey,
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.add),
+        ),
+        // bottomNavigationBar: BottomAppBar(
+        //     color: Color(0xFF014D4E),
+        //     shape: CircularNotchedRectangle(),
+        //     child: Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //       children: [
+        //         IconButton(
+        //             onPressed: () {},
+        //             icon: const Icon(Icons.home,
+        //                 color: Color.fromRGBO(43, 217, 254, 1.0))),
+        //         IconButton(
+        //             onPressed: () {},
+        //             icon: const Icon(Icons.favorite, color: Colors.red))
+        //       ],
+        bottomNavigationBar: _bottomNavigationBar());
+  }
+
+  BottomNavigationBar _bottomNavigationBar() {
+    return BottomNavigationBar(
+        backgroundColor: Color.fromARGB(255, 62, 152, 152),
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+        ]);
   }
 
   Drawer _drawer() {
     return Drawer(
+      // child: Container(
+      // color: Color.fromARGB(255, 0, 44, 45),
       child: ListView(
         children: const [
-          DrawerHeader(child: Text('Welcome')),
+          DrawerHeader(
+              child: Text(
+            'App Info',
+            style: TextStyle(
+                color: Color(0xFF014D4E),
+                fontWeight: FontWeight.bold,
+                fontSize: 21),
+          )),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Account'),
+            leading: Icon(Icons.account_circle, color: Color(0xFF014D4E)),
+            title: Text(
+              'Profile',
+              style: TextStyle(color: Color(0xFF014D4E)),
+            ),
           ),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Account'),
+            leading: Icon(
+              Icons.bookmark,
+              color: Color(0xFF014D4E),
+            ),
+            title: Text('Bookmark', style: TextStyle(color: Color(0xFF014D4E))),
           ),
+          ListTile(
+            leading: Icon(
+              Icons.settings,
+              color: Color(0xFF014D4E),
+            ),
+            title: Text(
+              'Setting',
+              style: TextStyle(color: Color(0xFF014D4E)),
+            ),
+          )
         ],
       ),
     );
@@ -66,16 +134,34 @@ class HomeScreen extends StatelessWidget {
 
   AppBar _appBar(BuildContext context) {
     return AppBar(
-      title: Text('Sutori'),
-      backgroundColor: Colors.amber,
-      actions: [
-        IconButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => InfoDetailScreen()));
-            },
-            icon: Icon(Icons.info))
-      ],
-    );
+        // backgroundColor: Color(0xFF014D4E),
+        iconTheme: const IconThemeData(color: Color(0xFF014D4E)),
+        title: const Text(
+          'Sutori',
+          style: TextStyle(
+              color: Color(0xFF014D4E),
+              fontWeight: FontWeight.bold,
+              fontSize: 26),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.notifications,
+                color: Color(0xFF014D4E),
+              )),
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => InfoDetailScreen()));
+              },
+              icon: const Icon(
+                Icons.info,
+                color: Color(0xFF014D4E),
+              ))
+        ]);
   }
 }
